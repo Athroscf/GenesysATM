@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-// Aplicando MaterialSkin
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Data.SqlClient;
 
 namespace GenisysATM
 {
-    public partial class frmMenuPrincipal : MaterialForm
+    public partial class frmBalanceCuenta : MaterialForm
     {
+
         private readonly MaterialSkinManager materialSkinManager;
 
-        public frmMenuPrincipal()
+        public frmBalanceCuenta()
         {
             InitializeComponent();
 
@@ -32,24 +32,13 @@ namespace GenisysATM
             );
         }
 
-        private void btnCliente_Click(object sender, EventArgs e)
+        private void frmBalanceCuenta_Load(object sender, EventArgs e)
         {
-            frmMenuCliente mc = new frmMenuCliente();
-            mc.Show();
-        }
-
-        private void btnServiciosPublicos_Click(object sender, EventArgs e)
-        {
-            frmPagoServiciosPublicos psp = new frmPagoServiciosPublicos();
-            psp.Show();
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            frmInicio i = new frmInicio();
-            MessageBox.Show("Gracias por utilizar el sistema! Lo esperamos.");
-            this.Close();
-            i.Show();
+            //using (SqlConnection connection = new SqlConnection(@"server = (local)\chrisfiallos;" +
+            //        "integrated security = true; database = GenisysATM_V2"))
+            //{
+            //    SqlCommand cmd = "Select Nombre"
+            //}
         }
     }
 }

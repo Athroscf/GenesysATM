@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-// Aplicando MaterialSkin
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Data.SqlClient;
 
 namespace GenisysATM
 {
-    public partial class frmMenuPrincipal : MaterialForm
+    public partial class frmPagoServiciosPublicos : MaterialForm
     {
+
         private readonly MaterialSkinManager materialSkinManager;
 
-        public frmMenuPrincipal()
+        public frmPagoServiciosPublicos()
         {
             InitializeComponent();
 
@@ -32,24 +32,26 @@ namespace GenisysATM
             );
         }
 
-        private void btnCliente_Click(object sender, EventArgs e)
-        {
-            frmMenuCliente mc = new frmMenuCliente();
-            mc.Show();
-        }
-
-        private void btnServiciosPublicos_Click(object sender, EventArgs e)
-        {
-            frmPagoServiciosPublicos psp = new frmPagoServiciosPublicos();
-            psp.Show();
-        }
-
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            frmInicio i = new frmInicio();
-            MessageBox.Show("Gracias por utilizar el sistema! Lo esperamos.");
             this.Close();
-            i.Show();
+        }
+
+        private void frmPagoServiciosPublicos_Load(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = new SqlConnection(@"server = (local)\chrisfiallos;" +
+                    "integrated security = true; database = GenisysATM_V2"))
+            {
+                string query = "select descripcion from ATM.ServicioPublico";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+
+            cbServiciosPublicos.DisplayMember = "Descripcion";
         }
     }
 }

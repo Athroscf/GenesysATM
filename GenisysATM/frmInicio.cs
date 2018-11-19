@@ -39,7 +39,9 @@ namespace GenisysATM
             if (atm.VerificarInicio(txtCuenta.Text, txtPIN.Text))
             {
                 MessageBox.Show("Bienvenido al sistema de ATM Genisys", "Información");
-
+                frmMenuPrincipal mp = new frmMenuPrincipal();
+                this.Hide();
+                mp.Show();
             }
             else
                 MessageBox.Show("Número de cuenta o PIN erróneos", "Información");
